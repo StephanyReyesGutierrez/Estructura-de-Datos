@@ -1,0 +1,23 @@
+DIAGONAL
+package clase.pkg1.ejercicio.pkg2;
+import java.util.Scanner;
+public class Clase1Ejercicio2 {
+    public static void main(String[] args) {
+
+        Scanner teclado = new Scanner(System.in);
+        
+        // Pedimos al usuario que ingrese un número
+        System.out.print("Ingresa un número: ");
+        int n = teclado.nextInt();
+        
+        // Imprimimos la diagonal de asteriscos con las condiciones:inicia en 0, numero sera menor que el ingresado por el usuario, sigue la sucesion. 
+        for (int i = 0; i < n; i++) {
+            // Imprimimos espacios antes del asterisco:columna menor qkue la fila.
+            for (int j = 0; j < i; j++) {
+                System.out.print(" ");
+            }
+            // Imprimimos el asterisco
+            System.out.println("*");
+        }
+    }
+}
