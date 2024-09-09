@@ -1,0 +1,19 @@
+TRIANGULO
+
+  Scanner teclado = new Scanner(System.in);
+        
+        // Pedimos al usuario que ingrese la altura del triángulo
+        System.out.print("Ingresa la altura del triángulo: ");
+        int altura = teclado.nextInt();
+        
+        // Imprime el triangulo, ya que inicia en uno toma en cuenta el numero exacto que ingresa el usuario
+        for (int i = 1; i <= altura; i++) {
+            // En cada fila imprime asteriscos como el número de la fila ej. fila 1 es un asterisco
+            for (int j = 1; j <= i; j++) {
+                System.out.print("*");
+            }
+            System.out.println();  // Nueva línea después de cada fila ya que sino todo lo hara en una sola fila 
+        }
+
+    }
+}
