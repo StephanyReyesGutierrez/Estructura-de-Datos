@@ -1,0 +1,64 @@
+ System.out.print("Ingresa un número: ");
+            int p=teclado.nextInt();
+            //NUMERO IMPAR
+            if (p % 2 == 1) {  // Si el número es impar
+            // Parte superior del diamante
+            for (int i = 0; i <= p / 2; i++) {
+            // Imprimir espacios
+            for (int j = 0; j < i; j++) {//imprime los espacios antes de los asteriscos en cada línea
+            System.out.print(" ");
+            }
+            // Imprimir asteriscos
+            for (int j = 0; j < p - 2 * i; j++) {
+            //número de asteriscos disminuye a medida que se incrementan los espacios.
+            System.out.print("*");
+            }
+            System.out.println();
+            }
+
+            // Parte inferior del diamante
+            for (int i = p / 2 - 1; i >= 0; i--) {
+            // Imprimir espacios
+            for (int j = 0; j < i; j++) {
+            System.out.print(" ");
+            }
+            // Imprimir asteriscos
+            for (int j = 0; j < p - 2 * i; j++) {
+            System.out.print("*");
+            }
+            System.out.println();
+            }
+        } else {  // Si el número es par
+            // Parte superior del rectángulo
+            for (int i = 0; i < p; i++) {
+            if (i == 0 || i == p - 1) {
+            // Imprimir la fila superior e inferior completa de asteriscos
+            for (int j = 0; j < p; j++) {
+        System.out.print("*");
+            }
+        } else {
+            // Imprimir filas del medio con dos espacios antes de los asteriscos
+            System.out.print(" ");
+            for (int j = 0; j < 2; j++) {
+            System.out.print("*");
+            }
+            }
+            System.out.println();
+            }
+            }
+break;
+        
+        case 4: {
+            System.out.println("Salio del programa. Gracias");}
+            break;
+            
+        default:{
+            System.out.println("Opción no válida, intente de nuevo.");}
+break;
+            }
+        } while (opcion != 4);
+
+    }
+}
+
+
