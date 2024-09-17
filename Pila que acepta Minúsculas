@@ -1,0 +1,120 @@
+package pilaminusculas;
+
+import java.util.InputMismatchException;
+
+import java.util.Scanner;
+
+public class PilaMinusculas {
+// se coloca teclado tope y pila como variables globales
+    private static Scanner teclado = new Scanner(System.in);
+    private static int tope = 0; // Maneja los espacios en la pila
+    private static String[] pila;
+
+    public static void main(String[] args) {
+
+        System.out.print("Ingrese el tamaño de la pila: ");
+        int tam = teclado.nextInt();/*Primero se declara de manera int pero se
+limpia a manera de texto para correr el codigo*/
+        teclado.nextLine();
+
+        int opcion;
+
+        pila = new String[tam];//Se coloca el tamaño de la pila 
+
+        do {
+            System.out.println("Menu");
+            System.out.println("1. Agregar");
+            System.out.println("2. Rellenar de manera Automatica el arreglo");
+            System.out.println("3. Mostrar");
+            System.out.println("4. Eliminar de la pila");
+            System.out.println("5. Salir");
+            System.out.print("Ingrese una opcion: ");
+
+            try { // verdadero si es entero el numero de la opcion
+                opcion = teclado.nextInt();
+                teclado.nextLine(); // Limpiar el /n después de nextInt()
+
+                switch (opcion) {
+                    case 1 ->
+                        agregar();
+                    case 2 ->
+                        rellenar();
+                    case 3 ->
+                        mostrar();
+                    case 4 ->
+                        eliminar();
+
+                    case 5 ->
+                        System.out.println("Saliendo...");
+
+                    default ->
+                        System.out.println("Opción no válida.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Error. Ingrese un número entero.");
+                teclado.next(); // Limpiar el input
+                opcion = 0; // Resetear opción para que el ciclo continúe
+            }
+        } while (opcion != 5);
+
+    }
+
+    private static void agregar() {
+        if (tope < pila.length) {
+            boolean minusculas = false;
+            while (!minusculas) {
+                System.out.print("Ingrese la letra (solo minúsculas): ");
+                String letra = teclado.nextLine();
+
+                // Verificar si la entrada es minúscula
+                if (letra.equals(letra.toLowerCase()) && letra.matches("[a-z]+")) {
+                    pila[tope] = letra;
+                    tope++;
+                    minusculas = true;
+                    System.out.println("Dato agregado correctamente.");
+                } else {
+                    System.out.println("Error. Ingrese solo letras minúsculas.");
+                }
+            }
+        } else {
+            System.out.println("La pila está llena.");
+        }
+    }
+
+    private static void rellenar() {
+        if (tope < pila.length) {
+            // Llenar la pila automáticamente desde el punto actual hasta que esté llena
+            for (int i = tope; i < pila.length; i++) {
+                // Generar una letra minúscula aleatoria
+                char letraAleatoria = (char) (Math.random() * 26 + 'a'); // Genera una letra entre 'a' y 'z'
+                pila[tope] = String.valueOf(letraAleatoria); // Almacena la letra en la pila
+                tope++; // Incrementa el tope después de agregar la letra
+            }
+            System.out.println("La pila se ha llenado automáticamente.");
+        } else {
+            System.out.println("La pila llena");
+        }
+
+    }
+
+    private static void mostrar() {
+        if (tope > 0) {
+            System.out.println("Los datos de la pila son:");
+            for (int i = 0; i < tope; i++) {
+                System.out.println(pila[i]);
+            }
+        } else {
+            System.out.println("La pila está vacía.");
+        }
+    }
+
+    private static void eliminar() {
+        if (tope > 0) {
+            tope--;
+            pila[tope] = ""; //Esto simula el "vaciar" la posición en la pila cuando eliminas un elemento.
+            System.out.println("Se eliminó el último dato.");
+        } else {
+            System.out.println("La pila está vacía.");
+        }
+    }
+}
