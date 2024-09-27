@@ -1,0 +1,98 @@
+package pila.no.repetir;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class PilaNoRepetir {
+
+    public static Scanner teclado = new Scanner(System.in);
+    public static String[] pila;
+    public static int tope = 0;
+
+    public static void main(String[] args) {
+        System.out.println("Ingresa el tamaño de la pila");
+        int tam = teclado.nextInt();
+        pila = new String[tam];
+        int opcion;
+
+        do {
+            System.out.println("Menu:");
+            System.out.println("1. Llenar");
+            System.out.println("2. Mostrar");
+            System.out.println("3. Eliminar");
+            System.out.println("4. Salir");
+            System.out.println("Ingrese la opcion deseada");
+
+            try {
+                opcion = teclado.nextInt();
+                switch (opcion) {
+                    case 1 ->
+                        llenarPila();
+                    case 2 ->
+                        mostrarPila();
+                    case 3 ->
+                        eliminarPila();
+                    case 4 ->
+                        System.out.println("Salio del programa. Gracias");
+                    default ->
+                        System.out.println("Invalido");
+                }
+
+            } catch (InputMismatchException e) {
+                System.out.println("Error debe ser un numero entero del menu.");
+                teclado.next();
+                opcion = 0;
+            }
+        } while (opcion != 4);
+    }
+
+    
+    private static void llenarPila() {
+        if (tope < pila.length) { // Verifica si aún hay espacio en la pila
+        
+        while (tope < pila.length) { // Mientras no se llene la pila
+            char letraAleatoria = (char) (Math.random() * 26 + 'a'); // Genera una letra aleatoria
+            int i;
+            // Verifica si la letra ya está en la pila
+            for (i= 0; i < tope; i++) {//elementos de la pila los recorre
+                if (pila[i].equals(String.valueOf(letraAleatoria))) {
+                    /*equals compara las letras dentro de la propia pila convierte 
+este carácter (char) en un objeto de tipo String. Esto es necesario porque los elementos
+de la pila son cadenas (String),*/
+                    break; // Si encuentra la letra, sale del bucle
+                }
+            }
+            
+            // Si no se encontró la letra en la pila, entonces i (letra nueva) llegó hasta tope
+            if (i == tope) {
+                pila[tope] = String.valueOf(letraAleatoria); // Almacena la letra en la pila
+                tope++; // Incrementa el tope hasta llenarlo 
+            }
+        }
+        System.out.println("Pila llenada automáticamente");
+    } else {
+        System.out.println("Pila llena");
+    }
+}
+
+    private static void mostrarPila() {
+        if (tope > 0) {//si la pila esta llena 
+            System.out.println("Los elementos de la pila son:");
+            for (int i = 0; i < tope; i++) {//recorre los elementos de la pila
+                System.out.println(pila[i]);
+            }
+        } else {
+            System.out.println("La pila esta vacia");
+        }
+    }
+
+    private static void eliminarPila() {
+        if( tope>0){
+            tope--;
+            pila[tope]=" ";
+            System.out.println("Ultimo dato eliminado");
+        }else{
+            System.out.println("La pila esta vacia");
+        }
+    }
+}
