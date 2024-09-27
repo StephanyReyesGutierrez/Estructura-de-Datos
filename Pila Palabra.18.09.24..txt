@@ -1,0 +1,142 @@
+package pilapalabra;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class PilaPalabra {
+
+    private static Scanner teclado = new Scanner(System.in);
+    private static int tope = 0;
+    private static String[] pila;
+
+    public static void main(String[] args) {
+
+        System.out.print("Ingrese el tamaño de la pila: ");
+        int tam = teclado.nextInt();/*Primero se declara de manera int pero se
+limpia a manera de texto para correr el codigo*/
+        teclado.nextLine();
+
+        pila = new String[tam];
+        int opcion;//si no se declara fuera del do no se ejecutara completo 
+        do {//mostrar almenos una vez
+            System.out.println("Menu: ");
+            System.out.println("1. Llenar");
+            System.out.println("2. Mostrar");
+            System.out.println("3. Eliminar");
+            System.out.println("4. Salir");
+            System.out.println("Ingresa una opcion");
+
+            try {//verdadero si
+                opcion = teclado.nextInt();
+                teclado.nextLine();//limpia el n/
+
+                switch (opcion) {
+                    case 1 ->
+                        llenarPila();
+                    case 2 ->
+                        mostrarPila();
+                    case 3 ->
+                        eliminarPila();
+                    case 4 ->
+                        System.out.println("Saliendo...");
+
+                    default ->
+                        System.out.println("Opción no válida.");
+                }
+            } catch (InputMismatchException e) {//en ecepcion del verdadero
+                System.out.println("Error. Ingrese un número entero.");
+                teclado.next(); // Limpiar el input
+                opcion = 0; // Resetear opción para que el ciclo continúe
+            }
+        } while (opcion != 4);
+
+    }
+
+    private static void llenarPila() {
+
+        if (tope < pila.length) {/*Si los espacios a llenar de la pila son menores 
+            al tamaño de la pila*/
+            for (int i = tope; i < pila.length; i++) {/*for para llenar una pila completa
+                 esta debe cumplir con el que inicia en tope,debe llenarse menor al tamaño y
+                 incrementar hasta llenar*/
+                String palabra = generarPalabra();/*los caracteres especificados anteriormente 
+                se almacenaran en forma de palabra en la variable palabra*/
+                pila[tope] = palabra;/* ahora la palabra creada se almacenara en la pila para
+                ocupar los espacios*/
+                tope++;//incrementara los espacios 
+            }
+            System.out.println("  La pila se lleno. ");
+//cuando se llenen todos los espacios 
+        } else {
+            System.out.println("La pila esta vacia");
+        }
+    }
+
+    private static String generarPalabra() {
+        //INICIA EL ARRAY:
+
+        char[] letras = new char[6];
+        /*Colocando la caracteristica de dato,nombre del array y el seis pertenece al 
+tamaño de caracteres que contendra la palabra*/
+        letras[0] = (char) (Math.random() * 26 + 'A');
+        /*se especifica por pocisiones del array que caracteristicas tendra cada caracter de la 
+palabra, el primero es una palabra Mayuscula random del abecedario*/
+        letras[1] = (char) (Math.random() * 26 + 'a');
+        letras[2] = (char) (Math.random() * 26 + 'a');
+        /*especifica que en la pocision 1 y 2 sera una letra random minuscula 
+del abecedario*/
+        letras[3] = (char) (Math.random() * (47 - 33) + 33);
+//Estos numeros pertenecen a los caracteres en el rango del sistema ascii.
+        letras[4] = (char) (Math.random() * (47 - 33) + 33);
+
+        letras[5] = (char) ('0' + (int) (Math.random() * 10));
+// Genera un dígito entre '0' y '9'
+        return new String(letras);
+        // Convertir el array de caracteres en una cadena y devolverla
+    }
+
+    private static void mostrarPila() {
+        if (tope > 0) {//Mientras los espacios de la pila esten llenos tendra que mostrar
+            System.out.println("Los elementos de la pila son:");
+            for (int i = 0; i < tope; i++) {
+//iniciara el incremento hasta el ultimo numero de la pila gregado
+                System.out.println(pila[i]);//imprime la pila con los elemetos llenados 
+            }
+        } else {
+            System.out.println("La pila esta vacia.");
+        }
+
+    }
+
+    private static void eliminarPila() {
+        if (tope > 0) {
+            tope--;//quitara un elemento
+            pila[tope] = "";//Simulara el espacio vacio en la pila
+            System.out.println("Elemento de la pila eliminado.");
+        } else {
+            System.out.println("La pila esta vacia. ");
+        }
+    }
+}
+
+  char[] letras = new char[6];
+        String p="";
+        char l;
+        /*Colocando la caracteristica de dato,nombre del array y el seis pertenece al 
+tamaño de caracteres que contendra la palabra*/
+        l= (char) (Math.random() * 26 + 'A');
+        p=p+l;
+        /*se especifica por pocisiones del array que caracteristicas tendra cada caracter de la 
+palabra, el primero es una palabra Mayuscula random del abecedario*/
+      p = p+(char) (Math.random() * 26 + 'a');
+        p = p+(char) (Math.random() * 26 + 'a');
+        /*especifica que en la pocision 1 y 2 sera una letra random minuscula 
+del abecedario*/
+        p= p+(char) (Math.random() * (47 - 33) + 33);
+//Estos numeros pertenecen a los caracteres en el rango del sistema ascii.
+        p=p+ (char) (Math.random() * (47 - 33) + 33);
+
+        p =p+ (char) ('0' + (int) (Math.random() * 10));
+// Genera un dígito entre '0' y '9'
+        return new String(p);
+        // Convertir el array de caracteres en una cadena y devolverla
